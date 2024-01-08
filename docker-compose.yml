@@ -1,0 +1,56 @@
+version: '3.1'
+
+services:
+
+  zoo1:
+    image: zookeeper:3.8
+
+    ports:
+      - "2181:2181"
+    
+    networks:
+      - backend
+      
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+    volumes:
+      - /zoo/data:/data
+      - /zoo/datalog:/datalog
+  
+  kafka1:
+    image: confluentinc/cp-kafka:7.4.0
+    user: root
+    ports:
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zoo1:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka1:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+
+    volumes:
+      - /kafka/data:/var/lib/kafka/data
+    depends_on:
+      - zoo1
+    networks:
+      - backend
+
+  cassandra:
+    image: cassandra:5.0
+    ports:
+      - 9042:9042
+    volumes:
+      - ~/apps/cassandra:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=cloudinfra
+    networks:
+      - backend
+
+networks:
+  backend:
