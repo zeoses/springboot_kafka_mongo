@@ -1,0 +1,3 @@
+kafkatopic1: customers
+kafkatopic2: products
+KafkaBrokers: localhost:29092
