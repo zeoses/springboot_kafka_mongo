@@ -27,10 +27,12 @@ dependencies {
 	implementation("io.github.oshai:kotlin-logging-jvm:4.0.0")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springframework.kafka:spring-kafka")
-
-	implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin:3.1.3")
-	implementation("org.springframework.cloud:spring-cloud-starter-sleuth:3.1.3")
-
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	
+	implementation("org.springdoc:springdoc-openapi-data-rest:1.6.9")
+	implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
+	implementation("org.springdoc:springdoc-openapi-kotlin:1.6.9")
+	
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.0")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
