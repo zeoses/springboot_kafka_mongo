@@ -1,12 +1,13 @@
 package com.mars.dto
-
+import jakarta.validation.constraints.Min
+import jakarta.validation.constraints.Size
 
 data class ProductDTO (
-    val ProductID : String,
+    @get:Size(min = 4, max = 60) val ProductID : String,
     val Name: String,
-    val Price: Double = 0.0,
-    val StockQuantity: Int = 0,
+    @get:Min(0) val Price: Double = 0.0,
+    @get:Min(0) val StockQuantity: Int = 0,
     val Description: String?,
     val Category: String,
-    val CustomerID: String,
+    @get:Size(min = 4, max = 60) val CustomerID: String,
 )
