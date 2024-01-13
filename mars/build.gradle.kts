@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "3.2.1"
 	id("io.spring.dependency-management") version "1.1.4"
-	id("org.springframework.cloud.contract") version "3.1.3"
 	kotlin("jvm") version "1.9.21"
 	kotlin("plugin.spring") version "1.9.21"
 	kotlin("plugin.jpa") version "1.9.21"
@@ -31,7 +30,8 @@ dependencies {
 	
 	implementation("org.springdoc:springdoc-openapi-data-rest:1.6.9")
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
-	implementation("org.springdoc:springdoc-openapi-kotlin:1.6.9")
+	runtimeOnly("org.springdoc:springdoc-openapi-kotlin:1.6.9")
+	implementation("org.springdoc:springdoc-openapi-webflux-ui:1.6.9")
 	
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.0")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC2")
