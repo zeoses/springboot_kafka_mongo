@@ -41,16 +41,15 @@ services:
     networks:
       - backend
 
-  cassandra:
-    image: cassandra:5.0
+  mongodb:
+    image: mongo
     ports:
-      - 9042:9042
+      - 27017:27017
     volumes:
-      - ~/apps/cassandra:/var/lib/cassandra
+      - /mongo:/data/db
     environment:
-      - CASSANDRA_CLUSTER_NAME=cloudinfra
-    networks:
-      - backend
+      - MONGO_INITDB_ROOT_USERNAME=citizix
+      - MONGO_INITDB_ROOT_PASSWORD=S3cret
 
 networks:
   backend:
